@@ -33,6 +33,8 @@ class SaleOrder(models.Model):
 
     def write(self, line_values):
         res = super(SaleOrder, self).write(line_values)
+        if self.env.context.get("keep_copy_section_line_sequence"):
+            return res
         self._reset_sequence()
         return res
 
